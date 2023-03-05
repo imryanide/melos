@@ -22,16 +22,25 @@ public class MainActivity extends AppCompatActivity {
     TextView SongID;
     ImageView AlbumArt;
 
+    TextView Emotion;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Check if action bar is hidden, if it is not, hide it.
+//        if(getSupportActionBar()!=null){
+//            this.getSupportActionBar().hide();
+//        }
+
         SongName = (TextView) findViewById(R.id.songname);
         Artist = (TextView) findViewById(R.id.artistname);
         Album = (TextView) findViewById(R.id.albumname);
         SongID = (TextView) findViewById(R.id.TrackID);
         AlbumArt = (ImageView) findViewById(R.id.albumArt);
+        Emotion =(TextView) findViewById(R.id.emotion);
 
 
         ConstraintLayout cl = findViewById(R.id.mainLayout);
@@ -67,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
         String imgName = "sampleart" + rndInt;
         int id = getResources().getIdentifier(imgName, "drawable", getPackageName());
         AlbumArt.setImageResource(id);
+        String[] emotions = {"Happy", "Melancholic", "Euphoric", "Groovy"};
+        int r = rand.nextInt(emotions.length);
+        Emotion.setText(emotions[r]);
 
     }
 
