@@ -1,48 +1,75 @@
 package com.melos.Melos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
+import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Modifier;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     TextView SongName;
-    TextView Artist;
-    TextView Album;
-    TextView SongID;
     ImageView AlbumArt;
+    ConstraintLayout circleFrame;
+    LinearLayoutCompat cl;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getSupportActionBar()!=null){
+            this.getSupportActionBar().hide();
+        }
+
         setContentView(R.layout.activity_main);
+
+
         SongName = (TextView) findViewById(R.id.songname);
-        Artist = (TextView) findViewById(R.id.artistname);
-        Album = (TextView) findViewById(R.id.albumname);
-        SongID = (TextView) findViewById(R.id.TrackID);
-        AlbumArt = (ImageView) findViewById(R.id.albumArt);
+        AlbumArt = (ImageView) findViewById(R.id.albumart);
+        circleFrame = (ConstraintLayout) findViewById(R.id.constraintcircle);
+        circleFrame.setTag("circleframe");
+
+        cl = findViewById(R.id.mainLayout);
 
 
-        ConstraintLayout cl = findViewById(R.id.mainLayout);
-        AnimationDrawable animationDrawable = (AnimationDrawable) cl.getBackground();
-        animationDrawable.setEnterFadeDuration(1000);
-        animationDrawable.setExitFadeDuration(1000);
-        animationDrawable.start();
 
         IntentFilter filter = new IntentFilter("com.spotify.music.metadatachanged");
         SpotiSong s = new SpotiSong();
         registerReceiver(s, filter);
+
+
+
+        circleFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cl.setBackgroundResource(R.drawable.gradientlist);
+                AnimationDrawable animationDrawable = (AnimationDrawable) cl.getBackground();
+                animationDrawable.setEnterFadeDuration(1000);
+                animationDrawable.setExitFadeDuration(1000);
+                animationDrawable.start();
+                ObjectAnimator animator = ObjectAnimator.ofFloat(circleFrame, "translationY", 650f);
+                animator.setDuration(2000);
+                animator.start();
+            }
+        });
+
 
 
     }
@@ -59,16 +86,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateSong(String song, String artist, String album, String songid){
         SongName.setText(song);
-        Artist.setText(artist);
-        Album.setText(album);
-        SongID.setText(songid);
-        Random rand = new Random();
-        int rndInt = rand.nextInt(5) + 1; // n = the number of images, that start at idx 1
-        String imgName = "sampleart" + rndInt;
-        int id = getResources().getIdentifier(imgName, "drawable", getPackageName());
-        AlbumArt.setImageResource(id);
+
+//        Random rand = new Random();
+//        int rndInt = rand.nextInt(5) + 1; // n = the number of images, that start at idx 1
+//        String imgName = "sampleart" + rndInt;
+//        int id = getResources().getIdentifier(imgName, "drawable", getPackageName());
+//        AlbumArt.setImageResource(id);
 
     }
+
+
 
 
 
