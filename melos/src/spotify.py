@@ -73,7 +73,7 @@ class Spotify:
 
         if r.status_code == 200:
             retrieved_data = r.json()
-            keys = ["acousticness", "danceability", "duration_ms", "energy", "instrumentalness", "liveness", "loudness", "mode", "speechiness", "tempo", "valence"]
+            keys = ["acousticness", "danceability", "duration_ms", "energy", "instrumentalness", "liveness", "loudness", "mode", "speechiness", "tempo", "valence", "uri"]
             song_details = dict()
             for key in keys:
                 song_details[key] = retrieved_data[key]
