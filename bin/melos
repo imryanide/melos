@@ -1,3 +1,33 @@
 #!/usr/bin/env python3
 
+import sys
+import os
 
+from flask import Flask
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+from melos.apis.spotify import Spotify
+
+
+if __name__ != '__main__':
+    print("Execute this as a standalone app")
+    quit()
+
+f = Flask(__name__)
+
+@f.route("/<track_id>")
+def index(track_id):
+    try:
+        dt = Spotify(track_id).get_song_info()
+        a, v = dt.get("acousticness"), dt.get("valence")
+
+        return ([
+            ["anger", "sad/mellow"],
+            ["happy", "euphoric"]
+        ])[v > 0.5][a > 0.5]
+
+    except:
+        return "INVALID TRACK ID"
+
+f.run(host='0.0.0.0', port=8003, debug=True)

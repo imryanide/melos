@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import subprocess
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+from melos.apis.spotify import Spotify
+
+
+track = subprocess.check_output(["osascript", "script"]).decode("utf8").strip().split(':')[-1]
+S = Spotify(track).get_song_info()
+
+print(os.getenv("CLIENT_ID"))
+
+
+a = S["acousticness"]
+v = S["valence"]
+
+
+map = [
+    ["anger", "sad/mellow"],
+    ["happy", "euphoric"]
+]
+
+print(map[v > .5][a > .5])
