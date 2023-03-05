@@ -1,84 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:id="@+id/mainLayout"
     tools:context=".MainActivity"
+    android:background="@drawable/gradientlist"
+    android:id="@+id/mainLayout"
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintcircle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp"
-        >
-
-        <ImageView
-            android:id="@+id/albumart"
-            android:layout_width="380dp"
-            android:layout_height="380dp"
-            android:contentDescription="Frame Circle for song"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/circleframe"
-
-            />
-
-
-        <TextView
-            android:id="@+id/songname"
-            android:layout_width="288dp"
-            android:layout_height="97dp"
-            android:gravity="center"
-            android:text="Song"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/albumart"
-            app:layout_constraintEnd_toEndOf="@+id/albumart"
-            app:layout_constraintStart_toStartOf="@+id/albumart"
-            app:layout_constraintTop_toTopOf="@+id/albumart"
-            app:layout_constraintVertical_bias="0.296" />
-
-        <TextView
-            android:id="@+id/isfeeling"
-            android:layout_width="200dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="126dp"
-            android:gravity="center"
-            android:text="is feeling"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/albumart"
-            app:layout_constraintEnd_toEndOf="@+id/albumart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/songname" />
-
-        <TextView
-            android:id="@+id/emotion"
-            android:layout_width="201dp"
-            android:layout_height="53dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="emotion"
-            android:textSize="32sp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/albumart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/isfeeling"
-            app:layout_constraintVertical_bias="0.017" />
 
 
 
+    <TextView
+        android:id="@+id/songNameLabel"
+        android:layout_width="152dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="300dp"
+        android:gravity="center"
+        android:text="Song Name : "
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/songname"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="300dp"
+        android:gravity="center"
+        android:text="@string/songstring"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/artistnamelabel"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <TextView
+        android:id="@+id/artistnamelabel"
+        android:layout_width="152dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Artist Name : "
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/songNameLabel" />
+
+    <TextView
+        android:id="@+id/artistname"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/artiststrin"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/artistnamelabel"
+        app:layout_constraintTop_toBottomOf="@+id/songname" />
+
+    <TextView
+        android:id="@+id/albumnamelabel"
+        android:layout_width="152dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Album Name : "
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artistnamelabel" />
+
+    <TextView
+        android:id="@+id/albumname"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/albumstring"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/artistnamelabel"
+        app:layout_constraintTop_toBottomOf="@+id/artistname" />
+
+    <TextView
+        android:id="@+id/TrackID"
+        android:layout_width="402dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="492dp"
+        android:gravity="center"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/albumArt"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sampleart4"
+        android:contentDescription="Album Art" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="88dp"
+        android:text="Do da mood thingy"
+        android:background="@drawable/rounded_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
