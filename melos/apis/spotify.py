@@ -20,7 +20,7 @@ class Spotify:
         To get the authentication token from spotify API.
 
         :return : The Authentication token
-        
+
         """
 
         # Loading environment variables
@@ -71,6 +71,7 @@ class Spotify:
         }
         r = requests.get(url, headers=headers)
 
+
         if r.status_code == 200:
             retrieved_data = r.json()
             keys = ["acousticness", "danceability", "duration_ms", "energy", "instrumentalness", "liveness", "loudness", "mode", "speechiness", "tempo", "valence", "uri"]
@@ -78,4 +79,6 @@ class Spotify:
             for key in keys:
                 song_details[key] = retrieved_data[key]
             return  song_details
+        else:
+            print(auth_token, r.json(), sep='\n')
         return {}
