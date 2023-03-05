@@ -1,24 +1,26 @@
 package com.melos.Melos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     TextView SongName;
     TextView Artist;
     TextView Album;
     TextView SongID;
-    Button FindSong;
+    ImageView AlbumArt;
 
 
     @Override
@@ -29,7 +31,15 @@ public class MainActivity extends AppCompatActivity {
         Artist = (TextView) findViewById(R.id.artistname);
         Album = (TextView) findViewById(R.id.albumname);
         SongID = (TextView) findViewById(R.id.TrackID);
-//        FindSong = (Button) findViewById(R.id.FindSong);
+        AlbumArt = (ImageView) findViewById(R.id.albumArt);
+
+
+        ConstraintLayout cl = findViewById(R.id.mainLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) cl.getBackground();
+        animationDrawable.setEnterFadeDuration(1000);
+        animationDrawable.setExitFadeDuration(1000);
+        animationDrawable.start();
+
         IntentFilter filter = new IntentFilter("com.spotify.music.metadatachanged");
         SpotiSong s = new SpotiSong();
         registerReceiver(s, filter);
@@ -43,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connected() {
-        return;
     }
+
 
 
     public void updateSong(String song, String artist, String album, String songid){
@@ -52,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
         Artist.setText(artist);
         Album.setText(album);
         SongID.setText(songid);
+        Random rand = new Random();
+        int rndInt = rand.nextInt(5) + 1; // n = the number of images, that start at idx 1
+        String imgName = "sampleart" + rndInt;
+        int id = getResources().getIdentifier(imgName, "drawable", getPackageName());
+        AlbumArt.setImageResource(id);
+
     }
 
 
