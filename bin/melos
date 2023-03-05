@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 import sys
+import re
 import os
 
-from flask import Flask
+from flask import Flask, render_template, request, redirect
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -16,8 +17,8 @@ if __name__ != '__main__':
 
 f = Flask(__name__)
 
-@f.route("/<track_id>")
-def index(track_id):
+@f.route("/track/<track_id>")
+def track(track_id):
     try:
         dt = Spotify(track_id).get_song_info()
         a, v = dt.get("acousticness"), dt.get("valence")
@@ -29,5 +30,19 @@ def index(track_id):
 
     except:
         return "INVALID TRACK ID"
+
+@f.route("/")
+def index():
+    return render_template("index.html")
+
+@f.route("/fromspoturl", methods=["POST"])
+def fromspoturl():
+    try:
+        trackurl = request.form["trackurl"]
+        trackid, = re.findall(r".*/track/(.*)\?*.*", trackurl)
+
+        return redirect(f"/track/{trackid}")
+    except:
+        return redirect(f"/")
 
 f.run(host='0.0.0.0', port=8003, debug=True)
