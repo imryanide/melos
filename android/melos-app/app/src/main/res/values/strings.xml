@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">melos</string>
+    <string name="idstring">ID :</string>
+    <string name="albumstring">album</string>
+    <string name="artiststrin">artist</string>
+    <string name="songstring">song</string>
+</resources>
